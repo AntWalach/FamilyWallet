@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body{
+    font-family: "Nunito", sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    overflow: hidden;
+    color: rgba(34, 34, 96, .6);
+}
+
+.App{
+    height: 100vh;
+    background-image: linear-gradient(to right top, #e1f7ff, #d7f4ff, #cdf2ff, #c2efff, #b7ecff);
+    position: relative;
+}
