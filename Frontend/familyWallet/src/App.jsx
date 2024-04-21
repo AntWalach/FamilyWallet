@@ -5,9 +5,14 @@ import Expenses from "./Components/Expenses/Expenses";
 import Incomes from "./Components/Incomes/Incomes";
 import Transactions from "./Components/Transactions/Transactions";
 import React, { useState } from "react";
+import { useGlobalContext } from "./context/globalContext";
 
 function App() {
   const [active, setActive] = useState(1)
+
+  const global = useGlobalContext()
+  console.log(global);
+
   const displayData = () => {
     switch(active){
       case 1:
