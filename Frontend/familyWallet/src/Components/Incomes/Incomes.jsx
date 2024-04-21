@@ -8,7 +8,7 @@ function Incomes(){
     const {addIncome, incomes, getIncomes, deleteIncome} = useGlobalContext()
     useEffect(()=> {
         getIncomes()
-    }, [incomes])
+    }, [])
     return(
         <div className={`${layouts.incomes}`}>
             <div className={`${layouts.innerLayout}`}>
