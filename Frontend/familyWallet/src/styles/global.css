@@ -16,4 +16,16 @@ body{
     height: 100vh;
     background-image: linear-gradient(to right top, #e1f7ff, #d7f4ff, #cdf2ff, #c2efff, #b7ecff);
     position: relative;
+    main{
+        flex: 1;
+        background: rgba(252, 246, 249, 0.78);
+        border: 3px solid #FFFFFF;
+        backdrop-filter: blur(4.5px);
+        border-radius: 32px;
+        overflow: auto;
+        overflow-x: hidden;
+        &::-webkit-scrollbar{
+            width: 0;
+        }
+    }
 }

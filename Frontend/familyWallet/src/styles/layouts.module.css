@@ -47,10 +47,6 @@
     }
 }
 
-.userText{
-
-}
-
 .menuItems{
     flex: 1;
     display: flex;
@@ -77,6 +73,24 @@
     }
 }
 
+.active{
+    color: var(--main-color) !important;
+    i{
+        color: var(--main-color) !important;
+    }
+
+    &::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--main-color);
+        border-radius: 0 10px 10px 0;
+    }
+}
+
 .bottomNav{
     align-items: center;
     margin: .6rem 0;
@@ -89,4 +103,20 @@
     &:hover {
         color: var(--main-color);
     }
+}
+
+.dashboard{
+
+}
+
+.expenses{
+
+}
+
+.incomes{
+
+}
+
+.transactions{
+
 }

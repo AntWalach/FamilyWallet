@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import layouts from "../../styles/layouts.module.css";
 import { menuItems } from '../../utils/menuItems';
 import { signout } from '../../utils/icons';
 import avatar from '../../images/avatar.png'
 
 
-function Navigation(){
+function Navigation({active, setActive}){
     return(
         <div className={`${layouts.navigationStyled}`}>
             <div className={`${layouts.userContainer}`}>
@@ -18,7 +18,9 @@ function Navigation(){
             <ul className={`${layouts.menuItems}`}>
                 {menuItems.map((item) => {
                     return <li
-                        key={item.id}                        
+                        key={item.id}
+                        onClick={() => setActive(item.id)}
+                        className={active === item.id ? layouts.active : ''}           
                     >
                         {item.icon}
                         <span>{item.title}</span>
