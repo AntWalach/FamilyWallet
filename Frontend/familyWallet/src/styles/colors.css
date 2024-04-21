@@ -1,9 +1,12 @@
 :root {
-    --main-color: #222260;
-    --primary-color2: #22226099;
-    --primary-color3: #22226066;
+    --main-color: rgb(34, 34, 96);
+    --primary-color2: rgba(34, 34, 96, 0.6);
+    --primary-color3: rgba(34, 34, 96, 0.4);
     --primary-green: #42AD00;
     --primary-grey: #aaa;
     --primary-accent: #F56692;
     --primary-delete: #FF0000;
+    --button-color-main: #79deff;
+    --button-color-hover: #0096cd;
+    --button-color-text: #fff;
   }
