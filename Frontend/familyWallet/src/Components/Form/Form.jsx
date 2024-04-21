@@ -44,17 +44,6 @@ function Form(){
                     onChange={handleInput('amount')}
                 />
             </div>
-            <div className={`${layouts.inputControl}`}>
-                <DatePicker
-                    id='date'
-                    placeholderText='Enter a date'
-                    selected={date}
-                    dateFormat="dd/MM/yyyy"
-                    onChange={(date) => {
-                        setInputState({...inputState, date: date})
-                    }}
-                />
-            </div>
             <div className={`${layouts.selects} ${layouts.inputControl}`}>
                 <select required value={category} name="category" id="category" onChange={handleInput('category')}>
                     <option value="" disabled>Select Option</option>
@@ -69,8 +58,22 @@ function Form(){
             <div className={`${layouts.inputControl}`}>
                 <textarea name="description" value={description} placeholder='Add a description' id="description" cols="30" rows="4" onChange={handleInput('description')}></textarea>
             </div>
+            <div className={`${layouts.inputControl}`}>
+                <DatePicker
+                    id='date'
+                    placeholderText='Enter a date'
+                    selected={date}
+                    dateFormat="dd/MM/yyyy"
+                    onChange={(date) => {
+                        setInputState({...inputState, date: date})
+                    }}
+                />
+            </div>
             <div className={`${layouts.submitBtn}`}>
-                <button className="">Add Income</button>
+                <button className={`${layouts.buttonSubmit}`}>
+                    Add Income
+                    <i className="fa-solid fa-hand-holding-dollar mx-2"></i>
+                </button>
             </div>
         </form>
     )
