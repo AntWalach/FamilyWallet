@@ -2,7 +2,7 @@ import React from 'react'
 import layouts from "../../styles/layouts.module.css";
 import { dollar,calender,comment, money, freelance, stocks, users, card, piggy, book, food, medical, tv, takeaway, clothing, circle } from '../../utils/icons';
 
-function IncomeItem({
+function MoneyItem({
     id,
     title,
     amount,
@@ -57,7 +57,7 @@ function IncomeItem({
 
 
     return(
-        <div className={`${layouts.incomeItem}`}>
+        <div className={`${layouts.moneyItem}`}>
             <div className={`${layouts.icon}`}>
                 {type === 'expense' ? expenseIcon() : categoryIcon()}
             </div>
@@ -89,4 +89,4 @@ function IncomeItem({
     )
 }
 
-export default IncomeItem
+export default MoneyItem

@@ -186,7 +186,7 @@
     }
 }
 
-.incomeItem{
+.moneyItem{
     background: #fcf6f9;
     border: 2px solid #FFFFFF;
     border-radius: 32px;
@@ -198,11 +198,9 @@
     gap: 1rem;
     width: 100%;
     color: var(--main-color);
-
-
 }
 
-.incomeItem .icon{
+.moneyItem .icon{
     background-color: #f2f5fa;
     border: 2px solid #FFFFFF;
     border-radius: 32px;
@@ -218,7 +216,7 @@
     
 }
 
-.incomeItem .buttonSubmit{
+.moneyItem .buttonSubmit{
     background-color: var(--button-color-main);
     padding: 8px 6px;
     border: none;
@@ -229,11 +227,19 @@
     }
 }
 
-.incomeItem .btnCon{
-display: flex;
+.moneyItem .btnCon{
+  display: flex;
   justify-content: flex-end;
 }
 
-.incomeItem .content{
+.moneyItem .content{
     width: 100%;
+}
+
+.totalIncomeAmount{
+    color: #0ea20b;
+}
+
+.totalExpenseAmount{
+    color: var(--delete-red)
 }

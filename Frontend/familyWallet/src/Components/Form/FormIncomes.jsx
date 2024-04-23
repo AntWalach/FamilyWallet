@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { useGlobalContext } from '../../context/globalContext'
 
-function Form(){
+function FormIncomes(){
     const {addIncome} = useGlobalContext()
     const [inputState, setInputState] = useState({
         title: '',
@@ -22,6 +22,13 @@ function Form(){
 
     const handleSubmit = e => {
         e.preventDefault()
+        setInputState({
+            title: '',
+            amount: '',
+            date: '',
+            category: '',
+            description: '',
+        })
         addIncome(inputState)
     }
     return(
@@ -79,4 +86,4 @@ function Form(){
     )
 }
 
-export default Form
+export default FormIncomes
