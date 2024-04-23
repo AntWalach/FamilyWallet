@@ -80,7 +80,7 @@ function FormExpenses(){
             <div className={`${layouts.submitBtn}`}>
                 <button className={`${layouts.buttonSubmit}`}>
                     Add Expense
-                    <i class="fa-solid fa-heart-crack mx-2"></i>
+                    <i className="fa-solid fa-heart-crack mx-2"></i>
                 </button>
             </div>
         </form>

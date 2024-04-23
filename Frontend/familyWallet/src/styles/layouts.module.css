@@ -237,7 +237,7 @@
 }
 
 .totalIncomeAmount{
-    color: #0ea20b;
+    color: var(--primary-green);
 }
 
 .totalExpenseAmount{
