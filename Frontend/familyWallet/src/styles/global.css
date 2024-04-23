@@ -9,18 +9,20 @@ body{
     font-family: "Nunito", sans-serif;
     font-size: clamp(1rem, 1.5vw, 1.2rem);
     overflow: hidden;
-    color: rgba(34, 34, 96, .6);
+    color: rgba(44, 44, 85, 0.6);
 }
 
 .App{
     height: 100vh;
-    background-image: linear-gradient(to right top, #e1f7ff, #d7f4ff, #cdf2ff, #c2efff, #b7ecff);
+    background-image: url('../assets/background.jpg');
+    background-size: cover;
+    background-position: center;
     position: relative;
     main{
         flex: 1;
-        background: rgba(252, 246, 249, 0.78);
+        background: rgba(252, 246, 249, 0.712);
         border: 3px solid #FFFFFF;
-        backdrop-filter: blur(4.5px);
+        backdrop-filter: blur(4px);
         border-radius: 32px;
         overflow: auto;
         overflow-x: hidden;

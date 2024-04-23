@@ -1,13 +1,14 @@
 :root {
-    --main-color: rgb(34, 34, 96);
-    --primary-color2: rgba(34, 34, 96, 0.6);
-    --primary-color3: rgba(34, 34, 96, 0.4);
+    --main-color: rgb(15, 84, 149);
+    --primary-color2: rgba(15, 84, 149, 0.6);
+    --primary-color3: rgba(15, 84, 149, 0.4);
     --primary-green: #42AD00;
     --primary-grey: #aaa;
     --primary-accent: #F56692;
-    --primary-delete: #FF0000;
-    --button-color-main: #79deff;
+    --primary-delete: #ec1a0a;
+    --button-color-main: #1c7dca;
     --button-color-hover: #0096cd;
     --button-color-text: #fff;
-    --delete-red: #d70019;
+    --delete-red: #ec1a0a;
+    --smooth-white-color1: #faf9f9;
   }
