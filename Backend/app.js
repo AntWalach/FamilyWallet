@@ -3,7 +3,7 @@ const cors = require('cors');
 const { db } = require('./db/db');
 const {readdirSync} = require('fs');
 const cookieParser = require('cookie-parser');
-const fs = require("node:fs")
+const errorHandler = require('./helpers/errorHandler');
 const app = express();
 
 
@@ -19,6 +19,7 @@ app.use(cors({
     credentials: true,
 }));
 app.use(cookieParser())
+app.use(errorHandler)
 
 //routes
 readdirSync('./routes').map((route) => app.use('/api/v1', require('./routes/' + route)));

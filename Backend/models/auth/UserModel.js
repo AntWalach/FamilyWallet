@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema(
 
     photo: {
       type: String,
-      default: "https://avatars.githubusercontent.com/u/19819005?v=4",
+      default: "",
     },
 
     bio: {
@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["user", "admin", "creator"],
+      enum: ["user", "admin"],
       default: "user",
     },
 
