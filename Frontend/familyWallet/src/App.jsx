@@ -9,10 +9,11 @@ import { useGlobalContext } from "./context/globalContext";
 import Login from "./pages/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [active, setActive] = useState(1);
-
+  
   const global = useGlobalContext();
   const displayData = () => {
     switch (active) {
@@ -30,7 +31,8 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" >
+      <Toaster/>
       <BrowserRouter>
         <Routes>
           <Route path="/register" element={<Register />}></Route>
@@ -39,7 +41,7 @@ function App() {
             path="/familywallet"
             element={
               <div className={`${layouts.mainLayout}`}>
-                <Navigation active={active} setActive={setActive} />
+                <Navigation active={active} setActive={setActive}  />
                 <main>{displayData()}</main>
               </div>
             }

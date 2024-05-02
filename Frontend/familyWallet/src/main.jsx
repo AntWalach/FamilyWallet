@@ -9,11 +9,10 @@ import { UserProvider } from "./context/userContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <GlobalProvider>
-        <UserProvider>
-          <App />
-        </UserProvider>
-      </GlobalProvider>
-
+    <GlobalProvider>
+      <UserProvider>
+        <App />
+      </UserProvider>
+    </GlobalProvider>
   </React.StrictMode>
 );

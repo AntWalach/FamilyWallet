@@ -1,12 +1,12 @@
 import React from 'react'
 import FormLogin from '../Components/Auth/FormLogin'
-
+import { useNavigate } from "react-router-dom";
 
 function login() {
+  const navigate = useNavigate();
   return (
     <div className="">
-      Test
-      <FormLogin/>
+      <FormLogin navigate={navigate}/>
     </div>
   )
 }

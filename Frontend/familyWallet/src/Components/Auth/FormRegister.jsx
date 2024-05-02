@@ -1,17 +1,15 @@
-import React from "react";
-import { eye } from "../../utils/icons";
+import React, { useState } from "react";
 import { useUserContext } from "../../context/userContext";
 
 function FormRegister({ navigate }) {
   const { registerUser, userState, handlerUserInput } = useUserContext();
   const { name, email, password } = userState;
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    registerUser(navigate, e);
-  };
+  const togglePassword = () => setShowPassword(!showPassword);
+
   return (
-    <form className="bg-white" onSubmit={handleSubmit}>
+    <form className="bg-white">
       <div>
         <h1 className="mb-2 text-center">Register for an account</h1>
         <p className="mb-8 text-center">
@@ -51,7 +49,7 @@ function FormRegister({ navigate }) {
             Password
           </label>
           <input
-            type="text"
+            type={showPassword ? "text" : "password"}
             id="password"
             value={password}
             name="password"
@@ -59,16 +57,19 @@ function FormRegister({ navigate }) {
             placeholder="Password"
             onChange={(e) => handlerUserInput("password")(e)}
           />
-          <button className="p-1 right-4">{eye}</button>
-        </div>
-        <div className="">
-          <a href="/forgot-password">Forgot password?</a>
+          <button type="button" className="p-1 right-4">
+            {showPassword ? (
+              <i className="fas fa-eye-slash" onClick={togglePassword}></i>
+            ) : (
+              <i className="fas fa-eye" onClick={togglePassword}></i>
+            )}
+          </button>
         </div>
         <div className="d-flex">
           <button
             type="submit"
             disabled={!name || !email || !password}
-            onClick={registerUser}
+            onClick={(e) => registerUser(navigate, e)}
           >
             Register Now
           </button>
