@@ -6,37 +6,48 @@ import Incomes from "./Components/Incomes/Incomes";
 import Transactions from "./Components/Transactions/Transactions";
 import React, { useState } from "react";
 import { useGlobalContext } from "./context/globalContext";
+import Login from "./pages/Login";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Register from "./pages/Register";
 
 function App() {
-  const [active, setActive] = useState(1)
+  const [active, setActive] = useState(1);
 
-  const global = useGlobalContext()
-
+  const global = useGlobalContext();
   const displayData = () => {
-    switch(active){
+    switch (active) {
       case 1:
-        return <Dashboard />
+        return <Dashboard />;
       case 2:
-        return <Transactions />
+        return <Transactions />;
       case 3:
-        return <Incomes />
+        return <Incomes />;
       case 4:
-        return <Expenses />
+        return <Expenses />;
       default:
-        return <Dashboard />
+        return <Dashboard />;
     }
-  }
+  };
 
   return (
-    <div className='App'>
-      <div className={`${layouts.mainLayout}`}>
-        <Navigation active={active} setActive={setActive}/>
-        <main>
-          {displayData()}
-        </main>
-      </div>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route
+            path="/familywallet"
+            element={
+              <div className={`${layouts.mainLayout}`}>
+                <Navigation active={active} setActive={setActive} />
+                <main>{displayData()}</main>
+              </div>
+            }
+          ></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
