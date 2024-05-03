@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 const UserContext = React.createContext();
-
+axios.defaults.withCredentials = true;
 const BASE_URL = "http://localhost:5000/api/v1/";
 
 export const UserProvider = ({ children }) => {
@@ -56,6 +56,7 @@ export const UserProvider = ({ children }) => {
         },
         { withCredentials: true }
       );
+      await getUser();
 
       toast.success("User logged in successfully");
       setUserState({
@@ -64,9 +65,6 @@ export const UserProvider = ({ children }) => {
       });
 
       navigate("/familywallet");
-      //[FIX]to fix, data is not loading, u have to reload page to load the data
-      location.reload()
-      //to fix
     } catch (error) {
       console.log("Error login user", error);
       toast.error(error.response.data.message);
@@ -138,14 +136,14 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const loginStatusGetUser = async () => {
       const isLoggedIn = await userLoginStatus();
-      console.log("isLoggedIn",isLoggedIn)
+      console.log("isLoggedIn", isLoggedIn);
       if (isLoggedIn) {
         getUser();
       }
     };
     loginStatusGetUser();
   }, []);
-console.log(user)
+  console.log(user);
   return (
     <UserContext.Provider
       value={{
@@ -154,8 +152,8 @@ console.log(user)
         handlerUserInput,
         loginUser,
         logoutUser,
-        userLoginStatus, 
-        user
+        userLoginStatus,
+        user,
       }}
     >
       {children}
