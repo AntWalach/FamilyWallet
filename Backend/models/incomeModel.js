@@ -33,6 +33,10 @@ const IncomeSchema = new mongoose.Schema({
         maxLength: 50,
         trim: true
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 }, {timestamps: true})
 
 module.exports = mongoose.model('Income', IncomeSchema);
