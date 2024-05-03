@@ -125,6 +125,82 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const emailVerification = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.post(
+        `${BASE_URL}verify-email`,
+        {},
+        { withCredentials: true }
+      );
+      toast.success("Email verification sent successfully");
+      setLoading(false);
+    } catch (error) {
+      console.log("Error sending email verification", error);
+      setLoading(false);
+      toast.error(error.response.data.message);
+    }
+  };
+
+  const verifyUser = async (navigate, token) => {
+    setLoading(true);
+    try {
+      const res = await axios.post(
+        `${BASE_URL}verify-user/${token}`,
+        {},
+        { withCredentials: true }
+      );
+
+      toast.success("User verified successfully");
+      await getUser();
+
+      setLoading(false);
+      navigate("/familywallet");
+    } catch (error) {
+      console.log("Error varifying user", error);
+      toast.error(error.response.data.message);
+      setLoading(false);
+    }
+  };
+
+  const forgotPasswordEmail = async (navigate, email) => {
+    setLoading(true);
+    try {
+      const res = await axios.post(
+        `${BASE_URL}forgot-password`,
+        { email },
+        { withCredentials: true }
+      );
+
+      toast.success("Forgot password email sent successfully");
+      setLoading(false);
+      navigate("/login");
+    } catch (error) {
+      console.log("Error sending forgot password email", error);
+      toast.error(error.response.data.message);
+      setLoading(false);
+    }
+  };
+
+  const resetPassword = async (navigate, token, password) => {
+    setLoading(true);
+    try {
+      const res = await axios.post(
+        `${BASE_URL}reset-password/${token}`,
+        { password },
+        { withCredentials: true }
+      );
+
+      toast.success("Password reset successfully");
+      setLoading(false);
+      navigate("/login");
+    } catch (error) {
+      console.log("Error resetting password", error);
+      toast.error(error.response.data.message);
+      setLoading(false);
+    }
+  };
+
   const handlerUserInput = (name) => (e) => {
     const value = e.target.value;
     setUserState((prevState) => ({
@@ -154,6 +230,10 @@ export const UserProvider = ({ children }) => {
         logoutUser,
         userLoginStatus,
         user,
+        emailVerification,
+        verifyUser,
+        forgotPasswordEmail,
+        resetPassword,
       }}
     >
       {children}

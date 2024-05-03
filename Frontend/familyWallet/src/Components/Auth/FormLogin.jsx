@@ -15,7 +15,7 @@ function FormLogin({ navigate }) {
           Login now. Don't have an account?{" "}
           <a href="/register">Register here</a>
         </p>
-        <div className="d-flex">
+        <div className="d-flex flex-column">
           <label htmlFor="email" className="mb-1">
             Email
           </label>

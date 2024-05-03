@@ -9,14 +9,14 @@ function FormRegister({ navigate }) {
   const togglePassword = () => setShowPassword(!showPassword);
 
   return (
-    <form className="bg-white">
-      <div>
+    <form className="position-relative rounded bg-white">
+      <div className="position-relative">
         <h1 className="mb-2 text-center">Register for an account</h1>
         <p className="mb-8 text-center">
           Create an account. Already have an account?{" "}
           <a href="/login">Login here</a>
         </p>
-        <div className="d-flex">
+        <div className="d-flex flex-column">
           <label htmlFor="name" className="mb-1">
             Full name
           </label>
@@ -30,7 +30,7 @@ function FormRegister({ navigate }) {
             onChange={(e) => handlerUserInput("name")(e)}
           />
         </div>
-        <div className="d-flex">
+        <div className="d-flex flex-column">
           <label htmlFor="email" className="mb-1">
             Email
           </label>
