@@ -33,7 +33,7 @@ function ResetPassword() {
   };
 
   return (
-    <form className="bg-white">
+    <form className="">
       <div className="">
         <h1 className="">Reset Your Password!</h1>
         <div className="">

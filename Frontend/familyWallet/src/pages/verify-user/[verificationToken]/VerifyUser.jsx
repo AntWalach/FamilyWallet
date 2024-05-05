@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useUserContext } from "../../../context/userContext";
+import layouts from "../../../styles/layouts.module.css";
 function VerifyUser() {
   const { verificationToken } = useParams();
   const { verifyUser } = useUserContext();
@@ -10,19 +11,15 @@ function VerifyUser() {
     verifyUser(navigate, verificationToken);
   };
   return (
-    <div className="container-fluid">
-      <div className="row vh-100">
-        <div className="d-flex flex-col justify-content-center align-items-center ">
-          <div className="bg-white">
-            <h1>Verify your account</h1>
-            <button
-              className="btn btn-success align-items-center"
-              onClick={handleVerifyClick}
-            >
-              Verify
-            </button>
-          </div>
-        </div>
+    <div className={`${layouts.forgotPass}`}>
+      <div className={`${layouts.loginForm}`}>
+        <h1 className={`${layouts.loginForm15}`}>Verify your account</h1>
+        <button
+          className={`${layouts.loginForm16}`}
+          onClick={handleVerifyClick}
+        >
+          Verify
+        </button>
       </div>
     </div>
   );

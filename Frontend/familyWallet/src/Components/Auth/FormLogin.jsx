@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useUserContext } from "../../context/userContext";
-
+import layouts from "../../styles/layouts.module.css";
 function FormLogin({ navigate }) {
   const { loginUser, userState, handlerUserInput } = useUserContext();
   const { email, password } = userState;
@@ -8,15 +8,17 @@ function FormLogin({ navigate }) {
 
   const togglePassword = () => setShowPassword(!showPassword);
   return (
-    <form className="bg-white">
-      <div>
-        <h1 className="mb-2 text-center">Login to Your account</h1>
-        <p className="mb-8 text-center">
+    <form className={`${layouts.loginForm}`}>
+      <div className={`${layouts.loginForm2}`}>
+        <h1 className={`${layouts.headerAuthForm}`}>Login to Your account</h1>
+        <p className={`${layouts.pAuthForm}`}>
           Login now. Don't have an account?{" "}
-          <a href="/register">Register here</a>
+          <a href="/register" className={`${layouts.linkAuthForm}`}>
+            Register here
+          </a>
         </p>
-        <div className="d-flex flex-column">
-          <label htmlFor="email" className="mb-1">
+        <div className={`${layouts.textDivInput}`}>
+          <label htmlFor="email" className={`${layouts.labelInput}`}>
             Email
           </label>
           <input
@@ -24,13 +26,13 @@ function FormLogin({ navigate }) {
             id="email"
             value={email}
             name="email"
-            className="px-4 py-3"
+            className={`${layouts.inputAuthForm}`}
             placeholder="Email"
             onChange={(e) => handlerUserInput("email")(e)}
           />
         </div>
-        <div className="d-relative">
-          <label htmlFor="password" className="mb-1">
+        <div className={`${layouts.passDivInput}`}>
+          <label htmlFor="password" className={`${layouts.labelInput}`}>
             Password
           </label>
           <input
@@ -38,11 +40,11 @@ function FormLogin({ navigate }) {
             id="password"
             value={password}
             name="password"
-            className="px-4 py-3"
+            className={`${layouts.inputAuthForm}`}
             placeholder="Password"
             onChange={(e) => handlerUserInput("password")(e)}
           />
-          <button type="button" className="p-1 right-4">
+          <button type="button" className={`${layouts.eyeButton}`}>
             {showPassword ? (
               <i className="fas fa-eye-slash" onClick={togglePassword}></i>
             ) : (
@@ -50,12 +52,15 @@ function FormLogin({ navigate }) {
             )}
           </button>
         </div>
-        <div className="">
-          <a href="/forgot-password">Forgot password?</a>
+        <div className={`${layouts.divLinkAuthForm}`}>
+          <a href="/forgot-password" className={`${layouts.linkAuthForm}`}>
+            Forgot password?
+          </a>
         </div>
         <div className="d-flex">
           <button
             type="submit"
+            className={`${layouts.btnAuthForm}`}
             disabled={!email || !password}
             onClick={(e) => loginUser(navigate, e)}
           >

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useUserContext } from "../../context/userContext";
+import layouts from "../../styles/layouts.module.css";
 
 function FormForgotPassword({ navigate }) {
   const { forgotPasswordEmail } = useUserContext();
@@ -18,11 +19,13 @@ function FormForgotPassword({ navigate }) {
   };
 
   return (
-    <form className="">
-      <div className="">
-        <h1 className="">Enter email to reset password</h1>
-        <div className="">
-          <label htmlFor="email" className="">
+    <form className={`${layouts.loginForm}`}>
+      <div className={`${layouts.loginForm2}`}>
+        <h1 className={`${layouts.headerAuthForm}`}>
+          Enter email to reset password
+        </h1>
+        <div className={`${layouts.textDivInput}`}>
+          <label htmlFor="email" className={`${layouts.labelInput}`}>
             Email
           </label>
           <input
@@ -30,17 +33,20 @@ function FormForgotPassword({ navigate }) {
             value={email}
             onChange={handleEmailChange}
             name="email"
+            className={`${layouts.inputAuthForm}`}
             placeholder=""
-            className=""
           />
         </div>
-        <div className="flex">
-          <button type="submit" onClick={handleSubmit} className="">
+        <div className="d-flex">
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className={`${layouts.btnAuthForm}`}
+          >
             Reset Password
           </button>
         </div>
       </div>
-      <img src="/flurry.png" alt="" />
     </form>
   );
 }
