@@ -1,6 +1,7 @@
 import React from "react";
 import layouts from "../../styles/layouts.module.css";
 import { useUserContext } from "../../context/userContext";
+import Chart from "../Chart/Chart";
 
 function Dashboard() {
   const { user, emailVerification } = useUserContext();
@@ -14,6 +15,7 @@ function Dashboard() {
         ) : (
           <button onClick={emailVerification}>Verify account</button>
         )}
+        <Chart/>
       </div>
     </div>
   );
