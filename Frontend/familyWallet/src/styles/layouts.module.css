@@ -327,9 +327,11 @@
     position: absolute; 
     right: 1rem; 
     padding: 0.25rem; 
-    top: 43%;
+    top: 50%;
     color: 22px;
     color: #999;
+    border: none;
+    background: none;
 }
 
 .passDivInput{

@@ -60,9 +60,9 @@ function FormRegister({ navigate }) {
           />
           <button type="button" className={`${layouts.eyeButton}`}>
             {showPassword ? (
-              <i className="fas fa-eye-slash" onClick={togglePassword}></i>
+              <i className="fa-solid fa-eye-slash" onClick={togglePassword}></i>
             ) : (
-              <i className="fas fa-eye" onClick={togglePassword}></i>
+              <i className="fa-solid fa-eye" onClick={togglePassword}></i>
             )}
           </button>
         </div>
