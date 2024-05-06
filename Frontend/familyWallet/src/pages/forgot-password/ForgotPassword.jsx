@@ -7,8 +7,6 @@ function ForgotPassword() {
   const navigate = useNavigate();
   return (
     <div className={`${layouts.formAuth}`}>
-      {/* <a href="/login"> LOGIN</a>
-      <a href="/register"> REGISTER</a> */}
       <FormForgotPassword navigate={navigate} />
     </div>
   );

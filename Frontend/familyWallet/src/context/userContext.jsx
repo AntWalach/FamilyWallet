@@ -201,6 +201,25 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const changePassword = async (currentPassword, newPassword) => {
+    setLoading(true);
+    try {
+      const res = await axios.patch(
+        `${BASE_URL}change-password`,
+        { currentPassword, newPassword },
+        {
+          withCredentials: true,
+        }
+      );
+      toast.success("Password changed successfully");
+      setLoading(false);
+    } catch (error) {
+      console.log("Error changing password", error);
+      toast.error(error.response.data.message);
+      setLoading(false);
+    }
+  };
+
   const handlerUserInput = (name) => (e) => {
     const value = e.target.value;
     setUserState((prevState) => ({
@@ -234,6 +253,7 @@ export const UserProvider = ({ children }) => {
         verifyUser,
         forgotPasswordEmail,
         resetPassword,
+        changePassword,
       }}
     >
       {children}

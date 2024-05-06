@@ -14,6 +14,7 @@ import Landing from "./pages/Landing";
 import VerifyUser from "./pages/verify-user/[verificationToken]/VerifyUser";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 import ResetPassword from "./pages/reset-password/[resetToken]/ResetPassword";
+import Settings from "./Components/Settings/Settings";
 
 function App() {
   const [active, setActive] = useState(1);
@@ -29,6 +30,8 @@ function App() {
         return <Incomes />;
       case 4:
         return <Expenses />;
+      case 5:
+        return <Settings />;
       default:
         return <Dashboard />;
     }
@@ -40,9 +43,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />}></Route>
-          <Route path="/verify-email/:verificationToken" element={<VerifyUser />}></Route>
+          <Route
+            path="/verify-email/:verificationToken"
+            element={<VerifyUser />}
+          ></Route>
           <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-          <Route path="/reset-password/:resetToken" element={<ResetPassword/>}></Route>
+          <Route
+            path="/reset-password/:resetToken"
+            element={<ResetPassword />}
+          ></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route
