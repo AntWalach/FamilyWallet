@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useUserContext } from "../context/userContext";
+import { useUserContext } from "../../../context/userContext";
 function ResetPassword() {
   const { resetPassword } = useUserContext();
-  const resetToken = useParams();
+  const { resetToken } = useParams();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -31,7 +31,7 @@ function ResetPassword() {
 
     resetPassword(navigate, resetToken, password);
   };
-
+  console.log(resetToken);
   return (
     <form className="">
       <div className="">

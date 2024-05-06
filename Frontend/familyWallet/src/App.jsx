@@ -13,7 +13,7 @@ import { Toaster } from "react-hot-toast";
 import Landing from "./pages/Landing";
 import VerifyUser from "./pages/verify-user/[verificationToken]/VerifyUser";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
+import ResetPassword from "./pages/reset-password/[resetToken]/ResetPassword";
 
 function App() {
   const [active, setActive] = useState(1);
