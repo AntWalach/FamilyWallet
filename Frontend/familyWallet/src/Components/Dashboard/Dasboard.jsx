@@ -13,7 +13,7 @@ function Dashboard() {
         {isVerified ? (
           ""
         ) : (
-          <button onClick={emailVerification}>Verify account</button>
+          <button onClick={emailVerification} className={`${layouts.verifyBtn}`}>Verify account</button>
         )}
         <Chart/>
       </div>
