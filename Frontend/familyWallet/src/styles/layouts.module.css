@@ -275,6 +275,16 @@
     z-index: 10; 
 }
 
+.loginFormSettings{
+    width: 70%;
+    max-width: 1020px;
+}
+
+.labelInputSettings{
+    color: var(--primary-color3) !important;
+    font-weight: 600;
+}
+
 .headerAuthForm {
     margin-bottom: 0.5rem; 
     font-weight: 500; 
@@ -291,12 +301,13 @@
 }
 
 .linkAuthForm {
-    font-weight: 700; 
+    font-weight: 800; 
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms; 
     transition-duration: 300ms; 
-    color: #2ECC71;
+    color: #26b160;
+    text-decoration: none;
 }
 
 .linkAuthForm :hover {
@@ -374,6 +385,10 @@
     cursor: pointer;
 }
 
+.btnAuthFormReset{
+    border-color: #3ad37a !important;
+}
+
 
 .forgotPass {
     height: 100vh;
@@ -421,3 +436,71 @@
     border: none;
 }
 
+.landingBuddy{
+    width: 550px;
+    height: 600px;
+    float: right;
+    margin-top: 5vh;
+    margin-right: -90px;
+}
+
+.landingTitle{
+    color: #FFFFFF;
+    font-weight: 700;
+    margin-top: 15vh;
+    margin-left: 5vw;
+    animation: scale-in-hor-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.landingTitleOrange{
+    color: #ff8252;
+}
+
+.landingTitlePink{
+    color: #fb375b;
+}
+
+.landingBtnLogin{
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #ed4545;
+    color: #FFFFFF;
+    margin-top: 20px;
+    margin-left: 80px;
+    border-radius: 32px;
+    cursor: pointer;
+    &:hover{
+        background-color: #a83030;
+        color: #FFFFFF;
+    }
+}
+
+.landingBtnRegister{
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #44004f;
+    color: #FFFFFF;
+    margin-top: 20px;
+    margin-left: 60px;
+    border-radius: 32px;
+    cursor: pointer;
+    &:hover{
+        background-color: #44004f;
+        color: #FFFFFF;
+    }
+}
+
+
+
+@keyframes scale-in-hor-left {
+    0% {
+      transform: scaleX(0);
+      transform-origin: 0% 0%;
+      opacity: 1;
+    }
+    100% {
+      transform: scaleX(1);
+      transform-origin: 0% 0%;
+      opacity: 1;
+    }
+  }

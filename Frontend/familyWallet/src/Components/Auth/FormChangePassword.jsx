@@ -30,10 +30,10 @@ function FormChangePassword() {
   };
 
   return (
-    <form className={`${layouts.loginForm}`}>
+    <form className={`${layouts.loginForm} ${layouts.loginFormSettings} mx-auto`}>
       <div className={`${layouts.loginForm2}`}>
         <div className={`${layouts.passDivInput}`}>
-          <label htmlFor="password" className={`${layouts.labelInput}`}>
+          <label htmlFor="password" className={`${layouts.labelInput} ${layouts.labelInputSettings}`}>
             Current Password
           </label>
           <input
@@ -58,7 +58,7 @@ function FormChangePassword() {
           </button>
         </div>
         <div className={`${layouts.passDivInput}`}>
-          <label htmlFor="password" className={`${layouts.labelInput}`}>
+          <label htmlFor="password" className={`${layouts.labelInput} ${layouts.labelInputSettings} `}>
             New Password
           </label>
           <input
@@ -86,7 +86,7 @@ function FormChangePassword() {
           <button
             type="submit"
             onClick={handleSubmit}
-            className={`${layouts.btnAuthForm}`}
+            className={`${layouts.btnAuthForm} ${layouts.btnAuthFormReset}`}
           >
             Change Password
           </button>
