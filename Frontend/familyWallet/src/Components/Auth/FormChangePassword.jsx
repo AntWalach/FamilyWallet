@@ -40,7 +40,6 @@ function FormChangePassword() {
             type={showPassword ? "text" : "password"}
             value={currentPassword}
             onChange={currentPasswordChange}
-            id="password"
             name="password"
             placeholder=""
             className={`${layouts.inputAuthForm}`}
@@ -65,7 +64,6 @@ function FormChangePassword() {
             type={showPassword ? "text" : "password"}
             value={newPassword}
             onChange={newPasswordChange}
-            id="password"
             name="password"
             placeholder=""
             className={`${layouts.inputAuthForm}`}

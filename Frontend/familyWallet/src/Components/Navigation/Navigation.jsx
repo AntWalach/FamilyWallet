@@ -12,8 +12,7 @@ function Navigation({ active, setActive }) {
   useRedirect("/login");
   const navigate = useNavigate();
   const { logoutUser, user } = useUserContext();
-  const { name, photo, isVerified, bio } = user;
-
+  const { name, photo, isVerified, bio, role } = user;
   const { getExpenses, getIncomes, totalMoney } = useGlobalContext();
 
   useEffect(() => {
@@ -36,6 +35,8 @@ function Navigation({ active, setActive }) {
       </div>
       <ul className={`${layouts.menuItems}`}>
         {menuItems.map((item) => {
+          const isAdmin = role === "admin";
+          if (item.id === 6 && !isAdmin) return null;
           return (
             <li
               key={item.id}

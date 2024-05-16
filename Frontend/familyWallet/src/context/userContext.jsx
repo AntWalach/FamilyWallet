@@ -8,6 +8,7 @@ const BASE_URL = "http://localhost:5000/api/v1/";
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [allUsers, setAllUsers] = useState([]);
   const [userState, setUserState] = useState({
     name: "",
     email: "",
@@ -220,6 +221,45 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const getAllUsers = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(
+        `${BASE_URL}admin/users`,
+        {},
+        { withCredentials: true }
+      );
+
+      setAllUsers(res.data);
+      setLoading(false);
+    } catch (error) {
+      console.log("Error getting all users", error);
+      toast.error(error.response.data.message);
+      setLoading(false);
+    }
+  };
+
+  const deleteUser = async (id) => {
+    setLoading(true);
+    try {
+      const res = await axios.delete(
+        `${BASE_URL}admin/users/${id}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+
+      toast.success("User deleted successfully");
+      setLoading(false);
+      getAllUsers();
+    } catch (error) {
+      console.log("Error deleting user", error);
+      toast.error(error.response.data.message);
+      setLoading(false);
+    }
+  };
+
   const handlerUserInput = (name) => (e) => {
     const value = e.target.value;
     setUserState((prevState) => ({
@@ -238,6 +278,12 @@ export const UserProvider = ({ children }) => {
     };
     loginStatusGetUser();
   }, []);
+
+  useEffect(() => {
+    if (user.role === "admin") {
+      getAllUsers();
+    }
+  }, [user.role]);
   console.log(user);
   return (
     <UserContext.Provider
@@ -254,6 +300,8 @@ export const UserProvider = ({ children }) => {
         forgotPasswordEmail,
         resetPassword,
         changePassword,
+        allUsers,
+        deleteUser,
       }}
     >
       {children}

@@ -15,11 +15,16 @@ import VerifyUser from "./pages/verify-user/[verificationToken]/VerifyUser";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 import ResetPassword from "./pages/reset-password/[resetToken]/ResetPassword";
 import Settings from "./Components/Settings/Settings";
+import { useUserContext } from "./context/userContext";
+import Admin from "./Components/Admin/Admin";
 
 function App() {
   const [active, setActive] = useState(1);
 
   const global = useGlobalContext();
+  const user = useUserContext();
+  const { role, isVerified } = user;
+  console.log(role);
   const displayData = () => {
     switch (active) {
       case 1:
@@ -32,6 +37,8 @@ function App() {
         return <Expenses />;
       case 5:
         return <Settings />;
+      case 6:
+        return <Admin />;
       default:
         return <Dashboard />;
     }
