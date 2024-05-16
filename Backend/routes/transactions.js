@@ -1,3 +1,4 @@
+const express = require("express");
 const {
   addExpense,
   getExpenses,
@@ -8,12 +9,9 @@ const {
   getIncomes,
   deleteIncome,
 } = require("../controllers/income");
-const {
-  createFamily,
-  joinFamily,
-} = require("../controllers/family");
+
 const { protect } = require("../middleware/authMiddleware.js");
-const router = require("express").Router();
+const router = express.Router();
 
 router
   .post("/add-income", protect, addIncome)
@@ -22,7 +20,5 @@ router
   .post("/add-expense", protect, addExpense)
   .get("/get-expenses", protect, getExpenses)
   .delete("/delete-expense/:id", deleteExpense)
-  .post("/create-family", protect, createFamily)
-  .post("/join-family/:familyName", protect, joinFamily); 
 
 module.exports = router;

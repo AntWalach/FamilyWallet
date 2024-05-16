@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import layouts from "../../styles/layouts.module.css";
-import { useGlobalContext } from '../../context/globalContext';
+import { useFamilyContext } from '../../context/familyContext';
 
 function Family() {
-  const { createFamily, joinFamily } = useGlobalContext();
+  const { createFamily, joinFamily } = useFamilyContext();
   const [familyName, setFamilyName] = useState('');
 
   const handleCreateFamily = () => {

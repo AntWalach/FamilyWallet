@@ -6,13 +6,16 @@ import "./styles/global.css";
 import "./styles/colors.css";
 import { GlobalProvider } from "./context/globalContext.jsx";
 import { UserProvider } from "./context/userContext.jsx";
+import { FamilyProvider } from "./context/familyContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <GlobalProvider>
-      <UserProvider>
-        <App />
-      </UserProvider>
-    </GlobalProvider>
+    <UserProvider>
+      <GlobalProvider>
+        <FamilyProvider>
+          <App />
+        </FamilyProvider>
+      </GlobalProvider>
+    </UserProvider>
   </React.StrictMode>
 );
