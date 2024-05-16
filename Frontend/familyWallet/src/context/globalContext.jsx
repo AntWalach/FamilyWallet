@@ -67,6 +67,24 @@ export const GlobalProvider = ({children}) => {
         return totalExpense;
     }
 
+    //Family
+    const createFamily = async (familyData) => {
+        try {
+            const response = await axios.post(`${BASE_URL}create-family`, familyData);
+            console.log(response.data);
+        } catch (error) {
+            setError(error.response.data.message);
+        }
+    };
+
+    const joinFamily = async (familyName) => {
+        try {
+            const response = await axios.post(`${BASE_URL}join-family/${familyName}`);
+            console.log(response.data); 
+        } catch (error) {
+            setError(error.response.data.message);
+        }
+    };
 
     //Other
     const totalMoney = () => {
@@ -93,6 +111,8 @@ export const GlobalProvider = ({children}) => {
             expenses,
             deleteExpense,
             totalExpense,
+            createFamily,
+            joinFamily,
             totalMoney,
         }}>
             {children}

@@ -4,6 +4,7 @@ import Dashboard from "./Components/Dashboard/Dasboard";
 import Expenses from "./Components/Expenses/Expenses";
 import Incomes from "./Components/Incomes/Incomes";
 import Transactions from "./Components/Transactions/Transactions";
+import Family from "./Components/Family/Family";
 import React, { useState } from "react";
 import { useGlobalContext } from "./context/globalContext";
 import Login from "./pages/Login";
@@ -33,7 +34,7 @@ function App() {
       case 5:
         return <Settings />;
       default:
-        return <Dashboard />;
+        return <Family />;
     }
   };
 

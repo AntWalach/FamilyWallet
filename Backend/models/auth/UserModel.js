@@ -42,6 +42,12 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+
+    family: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Family',
+      default: null,
+    },
   },
   { timestamps: true, minimize: true }
 );

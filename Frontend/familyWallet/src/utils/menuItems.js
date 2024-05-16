@@ -1,4 +1,4 @@
-import { dashboard, settings } from "./icons"
+import { dashboard, settings, family } from "./icons"
 import { transactions } from "./icons"
 import { trend } from "./icons"
 import { expenses } from "./icons"
@@ -34,5 +34,11 @@ export const menuItems =[
         icon: settings,
         link: '/dashboard'
 
+    },
+    {
+        id: 6,
+        title: 'Family',
+        icon: family,
+        link: '/family'
     }
 ]
