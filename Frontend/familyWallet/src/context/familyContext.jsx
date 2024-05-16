@@ -11,9 +11,9 @@ export const FamilyProvider = ({ children }) => {
     try {
       const response = await axios.post(`${BASE_URL}create-family`, familyData);
       console.log(response.data);
+      toast.success("Family created!");
     } catch (error) {
       console.log("Error creating family", error);
-      setLoading(false);
       toast.error(error.response.data.message);
     }
   };
@@ -22,9 +22,9 @@ export const FamilyProvider = ({ children }) => {
     try {
       const response = await axios.post(`${BASE_URL}join-family/${familyName}`);
       console.log(response.data);
+      toast.success("You joined the Family!");
     } catch (error) {
       console.log("Error joining family", error);
-      setLoading(false);
       toast.error(error.response.data.message);
     }
   };

@@ -36,7 +36,7 @@ function Navigation({ active, setActive }) {
       <ul className={`${layouts.menuItems}`}>
         {menuItems.map((item) => {
           const isAdmin = role === "admin";
-          if (item.id === 6 && !isAdmin) return null;
+          if (item.id === 7 && !isAdmin) return null;
           return (
             <li
               key={item.id}

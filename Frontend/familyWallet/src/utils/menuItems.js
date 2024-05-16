@@ -13,8 +13,8 @@ export const menuItems =[
     },
     {
         id: 2,
-        title: 'View Transactions',
-        icon: transactions,
+        title: 'Family',
+        icon: family,
         link: '/familywallet'
     },
     {
@@ -31,21 +31,20 @@ export const menuItems =[
     },
     {
         id: 5,
-        title: 'Settings',
-        icon: settings,
-        link: '/dashboard'
+        title: 'View Transactions',
+        icon: transactions,
+        link: '/familywallet'
     },
     {
         id: 6,
-        title: 'Admin',
-        icon: admin,
+        title: 'Settings',
+        icon: settings,
         link: '/familywallet'
     },
     {
         id: 7,
-        title: 'Family',
-        icon: family,
-        link: '/family'
-        //link: '/familywallet'
+        title: 'Admin',
+        icon: admin,
+        link: '/familywallet'
     },
 ]

@@ -1,0 +1,90 @@
+.statsCon {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+}
+
+.chartCon {
+    grid-column: 1 / 4;
+    height: 400px;
+}
+
+.amountCon {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.income,
+.expense {
+    grid-column: span 2;
+}
+
+.income,
+.expense,
+.balance {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fcf6f9;
+    border: 2px solid #ffffff;
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.income p,
+.expense p,
+.balance p {
+    font-size: 3.5rem;
+    font-weight: 500;
+}
+
+.balance {
+    grid-column: 2 / 4;
+}
+
+.balance p {
+    opacity: 0.6;
+    font-size: 3.5rem;
+}
+
+.balancePositive p {
+    color: green !important;
+}
+
+.balanceNegative p {
+    color: red !important;
+}
+
+.historyCon {
+    grid-column: 4 / -1;
+}
+
+.historyCon h2 {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.historyDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+.historyItem {
+    background: #fcf6f9;
+    border: 2px solid #ffffff;
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+    padding: 1rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

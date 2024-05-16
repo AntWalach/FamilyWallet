@@ -31,19 +31,19 @@ function App() {
       case 1:
         return <Dashboard />;
       case 2:
-        return <Transactions />;
+        return <Family />;
       case 3:
         return <Incomes />;
       case 4:
         return <Expenses />;
       case 5:
-        return <Settings />;
+        return <Transactions />;
       case 6:
-        return <Admin />;
+        return <Settings />;
       case 7:
-        return <Family />;
+        return <Admin />;
       default:
-        return <Family />;
+        return <Dashboard />;
     }
   };
 
