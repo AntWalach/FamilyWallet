@@ -1,7 +1,7 @@
 import React from 'react'
 import layouts from "../../styles/layouts.module.css";
 import { dollar,calender,comment, money, freelance, stocks, users, card, piggy, book, food, medical, tv, takeaway, clothing, circle } from '../../utils/icons';
-
+import { dateFormat } from '../../utils/dateFormat';
 function MoneyItem({
     id,
     title,
@@ -69,7 +69,7 @@ function MoneyItem({
                             <p>{dollar} {amount}</p>
                         </div>
                         <div className="col-auto">
-                            <p>{calender} {date}</p>
+                            <p>{calender} {dateFormat(date)}</p>
                         </div>
                         <div className="col-auto">
                             <p>

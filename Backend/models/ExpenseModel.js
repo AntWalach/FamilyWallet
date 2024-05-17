@@ -38,6 +38,10 @@ const ExpenseSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    isShared: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

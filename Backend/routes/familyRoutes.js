@@ -1,10 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const { protect } = require("../middleware/authMiddleware.js");
-const { createFamily, joinFamily } = require("../controllers/family");
+const {
+  createFamily,
+  registerFamilyMember,
+  getFamily,
+} = require("../controllers/family");
 
 router
   .post("/create-family", protect, createFamily)
-  .post("/join-family/:familyName", protect, joinFamily);
-
+  .post("/register-family-member", registerFamilyMember)
+  .get("/family/:id", protect, getFamily);
 module.exports = router;

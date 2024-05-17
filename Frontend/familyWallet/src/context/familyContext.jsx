@@ -1,35 +1,58 @@
-import React, { useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 const BASE_URL = "http://localhost:5000/api/v1/";
 
-const FamilyContext = React.createContext();
+const FamilyContext = createContext();
 
 export const FamilyProvider = ({ children }) => {
-  const createFamily = async (familyData) => {
+  const [family, setFamily] = useState(null);
+
+  const createFamily = async (familyName) => {
     try {
-      const response = await axios.post(`${BASE_URL}create-family`, familyData);
-      console.log(response.data);
-      toast.success("Family created!");
+      const res = await axios.post(`${BASE_URL}create-family`, {
+        name: familyName,
+      });
+      return res.data.data;
     } catch (error) {
-      console.log("Error creating family", error);
-      toast.error(error.response.data.message);
+      toast.error("There was an error creating the family!");
+      console.error("There was an error creating the family!", error);
     }
   };
 
-  const joinFamily = async (familyName) => {
+  const registerFamilyMember = async (familyId, member) => {
     try {
-      const response = await axios.post(`${BASE_URL}join-family/${familyName}`);
-      console.log(response.data);
-      toast.success("You joined the Family!");
+      await axios.post(`${BASE_URL}register-family-member`, {
+        familyId,
+        name: member.name,
+        email: member.email,
+        password: member.password,
+      });
+      toast.success(`Member ${member.name} registered successfully!`);
     } catch (error) {
-      console.log("Error joining family", error);
-      toast.error(error.response.data.message);
+      toast.error(`There was an error registering member ${member.name}!`);
+      console.error(
+        `There was an error registering member ${member.name}!`,
+        error
+      );
     }
   };
+
+  const getFamily = async (familyId) => {
+    try {
+      const res = await axios.get(`${BASE_URL}family/${familyId}`);
+      setFamily(res.data); 
+      return res.data;
+    } catch (error) {
+      console.error("Error fetching family details:", error);
+    }
+  };
+
   return (
-    <FamilyContext.Provider value={{ createFamily, joinFamily }}>
+    <FamilyContext.Provider
+      value={{ createFamily, registerFamilyMember, getFamily, family }}
+    >
       {children}
     </FamilyContext.Provider>
   );

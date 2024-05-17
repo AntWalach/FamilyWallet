@@ -1,50 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import layouts from "../../styles/layouts.module.css";
-import { useFamilyContext } from '../../context/familyContext';
+import FamilyRegistrationForm from "./FamilyRegistrationForm";
+import { useFamilyContext } from "../../context/familyContext";
+import { useUserContext } from "../../context/userContext";
 
 function Family() {
-  const { createFamily, joinFamily } = useFamilyContext();
-  const [familyName, setFamilyName] = useState('');
+  const { user } = useUserContext();
+  const { name, family } = user;
+  const { getFamily, family: familyData } = useFamilyContext();
 
-  const handleCreateFamily = () => {
-    if (familyName.trim() !== '') {
-      createFamily({ name: familyName });
-    } else {
-      // Obsługa błędu, gdy nazwa rodziny jest pusta
-    }
-  };
 
-  const handleJoinFamily = () => {
-    if (familyName.trim() !== '') {
-      joinFamily(familyName);
-    } else {
-      // Obsługa błędu, gdy nazwa rodziny jest pusta
-    }
-  };
+  useEffect(() => {
+    const fetchFamilyDetails = async () => {
+      if (family) {
+        try {
+          await getFamily(family);
+        } catch (error) {
+          console.error("Error fetching family details:", error);
+        } 
+      } else {
+        console.log("Error familyId")
+      }
+    };
+
+    fetchFamilyDetails();
+  }, [family, getFamily]);
 
   return (
     <div className={layouts.familyPage}>
-      <h1>Family Page</h1>
-      <div className={layouts.familyForm}>
-        <h2>Create Family</h2>
-        <input
-          type="text"
-          placeholder="Enter family name"
-          value={familyName}
-          onChange={(e) => setFamilyName(e.target.value)}
-        />
-        <button onClick={handleCreateFamily}>Create</button>
-      </div>
-      <div className={layouts.familyForm}>
-        <h2>Join Family</h2>
-        <input
-          type="text"
-          placeholder="Enter family name"
-          value={familyName}
-          onChange={(e) => setFamilyName(e.target.value)}
-        />
-        <button onClick={handleJoinFamily}>Join</button>
-      </div>
+      <h1>Family Page {name}</h1>
+      {!family ? (
+        <FamilyRegistrationForm />
+      ) : (
+        familyData && familyData.members && (
+          <div>
+            <h2>Family Members</h2>
+            <ul>
+              {familyData.members.map((member) => (
+                <li key={member._id}>
+                  <div>Name: {member.name}</div>
+                  <div>Email: {member.email}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      )}
     </div>
   );
 }

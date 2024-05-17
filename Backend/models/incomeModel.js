@@ -36,7 +36,11 @@ const IncomeSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    isShared: {
+        type: Boolean,
+        default: false,
+      },
 }, {timestamps: true})
 
 module.exports = mongoose.model('Income', IncomeSchema);

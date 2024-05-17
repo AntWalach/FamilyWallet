@@ -11,7 +11,7 @@ import {
   Legend,
   ArcElement,
 } from "chart.js";
-
+import { dateFormat } from "../../utils/dateFormat";
 import { Line } from "react-chartjs-2";
 import { useGlobalContext } from "../../context/globalContext";
 
@@ -32,7 +32,7 @@ function Chart() {
   const data = {
     labels: incomes.map((inc) => {
       const { date } = inc;
-      return date;
+      return dateFormat(date);
     }),
 
     datasets: [

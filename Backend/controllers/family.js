@@ -1,50 +1,102 @@
 const Family = require("../models/FamilyModel");
 const User = require("../models/auth/UserModel");
+const generateToken = require("../helpers/generateToken.js");
 
 exports.createFamily = async (req, res) => {
-  const { name } = req.body;
-
   try {
-    // Sprawdzanie, czy rodzina o podanej nazwie już istnieje
-    const existingFamily = await Family.findOne({ name });
-    if (existingFamily) {
-      return res.status(400).json({ message: "Family with this name already exists!" });
+    const { name } = req.body;
+    const ownerId = req.user._id;
+    const owner = await User.findById(ownerId);
+    if (!owner) {
+      return res.status(404).json({ success: false, error: "Owner not found" });
     }
 
-    const newFamily = new Family({ name });
+    const family = new Family({ name, owner: ownerId, members: [ownerId] });
+    await family.save();
 
-    await newFamily.save();
-    res.status(200).json({ message: "Family created successfully!" });
+    owner.family = family._id;
+    await owner.save();
+
+    res.status(201).json({ success: true, data: family });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error!" });
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
-exports.joinFamily = async (req, res) => {
-    const { familyName } = req.params;
-    const userId = req.user._id;
-  
-    try {
-      // Sprawdzenie, czy użytkownik już należy do jakiejś rodziny
-      const user = await User.findById(userId);
-      if (user.family) {
-        return res.status(400).json({ message: "User already belongs to a family!" });
-      }
-  
-      // Sprawdzenie, czy podana rodzina istnieje
-      const family = await Family.findOne({ name: familyName });
-      if (!family) {
-        return res.status(404).json({ message: "Family not found!" });
-      }
-  
-      // Przypisanie użytkownika do rodziny
-      user.family = family._id;
-      await user.save();
-  
-      res.status(200).json({ message: "User joined the family successfully!" });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Server error!" });
+exports.registerFamilyMember = async (req, res) => {
+  const { familyId, name, email, password } = req.body;
+
+  const family = await Family.findById(familyId);
+  if (!family) {
+    return res.status(404).json({ message: "Family not found" });
+  }
+  //validation
+  if (!name || !email || !password) {
+    res.status(400).json({ message: "All fields are required" });
+  }
+
+  //check password
+  if (password.length < 6) {
+    return res
+      .status(400)
+      .json({ message: "Password must be at least 6 characters" });
+  }
+
+  const userExists = await User.findOne({ email });
+
+  if (userExists) {
+    return res.status(400).json({ message: "User already exists" });
+  }
+
+  const user = await User.create({
+    family: familyId,
+    name,
+    email,
+    password,
+  });
+
+  const token = generateToken(user._id);
+
+  res.cookie("token", token, {
+    path: "/",
+    httpOnly: true,
+    maxAge: 30 * 24 * 60 * 60 * 60 * 1000, //30 days
+    sameSite: true,
+    secure: true,
+  });
+  await user.save();
+  family.members.push(user._id);
+  await family.save();
+
+  if (user) {
+    const { _id, name, email, role, photo, bio, isVerified } = user;
+
+    // 201 Created
+    res.status(201).json({
+      _id,
+      name,
+      email,
+      role,
+      photo,
+      bio,
+      isVerified,
+      token,
+    });
+  } else {
+    res.status(400).json({ message: "Invalid user data" });
+  }
+};
+
+exports.getFamily = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const family = await Family.findById(id).populate('members', 'name email role photo bio isVerified');
+    if (!family) {
+      return res.status(404).json({ message: "Family not found" });
     }
-  };
+    res.status(200).json(family);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
