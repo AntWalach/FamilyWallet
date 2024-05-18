@@ -9,6 +9,6 @@ const {
 
 router
   .post("/create-family", protect, createFamily)
-  .post("/register-family-member", registerFamilyMember)
-  .get("/family/:id", protect, getFamily);
+  .post("/register-family-member", protect, registerFamilyMember)
+  .get("/family", protect, getFamily);
 module.exports = router;

@@ -7,27 +7,17 @@ import { useUserContext } from "../../context/userContext";
 function Family() {
   const { user } = useUserContext();
   const { name, family } = user;
-  const { getFamily, family: familyData } = useFamilyContext();
+  const { getFamily, familyData } = useFamilyContext();
 
 
   useEffect(() => {
-    const fetchFamilyDetails = async () => {
-      if (family) {
-        try {
-          await getFamily(family);
-        } catch (error) {
-          console.error("Error fetching family details:", error);
-        } 
-      } else {
-        console.log("Error familyId")
-      }
-    };
-
-    fetchFamilyDetails();
-  }, [family, getFamily]);
+    if(family){
+      getFamily()
+    }
+  }, []);
 
   return (
-    <div className={layouts.familyPage}>
+    <div className={layouts.innerLayout}>
       <h1>Family Page {name}</h1>
       {!family ? (
         <FamilyRegistrationForm />

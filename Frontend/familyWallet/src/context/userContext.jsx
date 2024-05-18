@@ -294,6 +294,7 @@ export const UserProvider = ({ children }) => {
         loginUser,
         logoutUser,
         userLoginStatus,
+        getUser,
         user,
         emailVerification,
         verifyUser,

@@ -8,7 +8,7 @@ exports.createFamily = async (req, res) => {
     const ownerId = req.user._id;
     const owner = await User.findById(ownerId);
     if (!owner) {
-      return res.status(404).json({ success: false, error: "Owner not found" });
+      return res.status(404).json({ message: "Owner not found!"  });
     }
 
     const family = new Family({ name, owner: ownerId, members: [ownerId] });
@@ -17,9 +17,9 @@ exports.createFamily = async (req, res) => {
     owner.family = family._id;
     await owner.save();
 
-    res.status(201).json({ success: true, data: family });
+    res.status(201).json({ message: "Family created", data: family});
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    res.status(500).json({  message: "Server error" });
   }
 };
 
@@ -57,13 +57,13 @@ exports.registerFamilyMember = async (req, res) => {
 
   const token = generateToken(user._id);
 
-  res.cookie("token", token, {
-    path: "/",
-    httpOnly: true,
-    maxAge: 30 * 24 * 60 * 60 * 60 * 1000, //30 days
-    sameSite: true,
-    secure: true,
-  });
+  // res.cookie("token", token, {
+  //   path: "/",
+  //   httpOnly: true,
+  //   maxAge: 30 * 24 * 60 * 60 * 60 * 1000, //30 days
+  //   sameSite: true,
+  //   secure: true,
+  // });
   await user.save();
   family.members.push(user._id);
   await family.save();
@@ -89,14 +89,13 @@ exports.registerFamilyMember = async (req, res) => {
 
 exports.getFamily = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const family = await Family.findById(id).populate('members', 'name email role photo bio isVerified');
+    const familyId = req.user.family
+    const family = await Family.findById(familyId).populate('members', 'name email role photo bio isVerified');
     if (!family) {
       return res.status(404).json({ message: "Family not found" });
     }
     res.status(200).json(family);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Server error!" });
   }
 };

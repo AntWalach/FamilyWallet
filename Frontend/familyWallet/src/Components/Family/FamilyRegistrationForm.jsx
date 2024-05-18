@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useFamilyContext } from '../../context/familyContext';
+import { useUserContext } from '../../context/userContext';
 
 const FamilyRegistrationForm = () => {
 
 const [familyName, setFamilyName] = useState('');
 const [members, setMembers] = useState([{ name: '', email: '', password: '' }]);
 const { createFamily, registerFamilyMember } = useFamilyContext();
-
+const {getUser} = useUserContext()
 const handleMemberChange = (index, event) => {
   const { name, value } = event.target;
   const updatedMembers = [...members];
@@ -28,7 +29,7 @@ const handleSubmit = async (e) => {
     await Promise.all(
       members.map(member => registerFamilyMember(familyId, member))
     );
-
+    getUser()
   } catch (error) {
     console.error('There was an error creating the family or registering members!', error);
   }

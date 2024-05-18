@@ -7,16 +7,17 @@ const BASE_URL = "http://localhost:5000/api/v1/";
 const FamilyContext = createContext();
 
 export const FamilyProvider = ({ children }) => {
-  const [family, setFamily] = useState(null);
+  const [familyData, setFamilyData] = useState({});
 
   const createFamily = async (familyName) => {
     try {
       const res = await axios.post(`${BASE_URL}create-family`, {
         name: familyName,
       });
+      toast.success(`Family created successfully`);
       return res.data.data;
     } catch (error) {
-      toast.error("There was an error creating the family!");
+      toast.error(error.response.data.message);
       console.error("There was an error creating the family!", error);
     }
   };
@@ -31,7 +32,7 @@ export const FamilyProvider = ({ children }) => {
       });
       toast.success(`Member ${member.name} registered successfully!`);
     } catch (error) {
-      toast.error(`There was an error registering member ${member.name}!`);
+      toast.error(error.response.data.message);
       console.error(
         `There was an error registering member ${member.name}!`,
         error
@@ -39,19 +40,19 @@ export const FamilyProvider = ({ children }) => {
     }
   };
 
-  const getFamily = async (familyId) => {
+  const getFamily = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}family/${familyId}`);
-      setFamily(res.data); 
-      return res.data;
+      const res = await axios.get(`${BASE_URL}family`);
+      setFamilyData(res.data);
     } catch (error) {
+      toast.error(error.response.data.message);
       console.error("Error fetching family details:", error);
     }
   };
 
   return (
     <FamilyContext.Provider
-      value={{ createFamily, registerFamilyMember, getFamily, family }}
+      value={{ createFamily, registerFamilyMember, getFamily, familyData }}
     >
       {children}
     </FamilyContext.Provider>

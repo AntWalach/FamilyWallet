@@ -41,13 +41,13 @@ exports.registerUser = asyncHandler(async (req, res) => {
   const token = generateToken(user._id);
   //console.log("Token " + token);
   //send back the user and token in the response to the client
-  res.cookie("token", token, {
-    path: "/",
-    httpOnly: true,
-    maxAge: 30 * 24 * 60 * 60 * 60 * 1000, //30 days
-    sameSite: true,
-    secure: true,
-  });
+  // res.cookie("token", token, {
+  //   path: "/",
+  //   httpOnly: true,
+  //   maxAge: 30 * 24 * 60 * 60 * 60 * 1000, //30 days
+  //   sameSite: true,
+  //   secure: true,
+  // });
 
   if (user) {
     const { _id, name, email, role, photo, bio, isVerified } = user;
