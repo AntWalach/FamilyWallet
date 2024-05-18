@@ -35,6 +35,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    familyRole: "parent",
   });
 
   //generating token with id
@@ -183,7 +184,6 @@ exports.userLoginStatus = asyncHandler(async (req, res) => {
 exports.verifyEmail = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
-
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   }
@@ -194,14 +194,11 @@ exports.verifyEmail = asyncHandler(async (req, res) => {
 
   let token = await Token.findOne({ userId: user._id });
 
-
   if (token) {
     await token.deleteOne();
   }
 
-
   const verificationToken = crypto.randomBytes(64).toString("hex") + user._id;
-
 
   const hashedToken = hashToken(verificationToken);
 
@@ -212,9 +209,7 @@ exports.verifyEmail = asyncHandler(async (req, res) => {
     expiresAt: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
   }).save();
 
-
   const verificationLink = `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
-
 
   const subject = "Email Verification";
   const send_to = user.email;
@@ -355,19 +350,19 @@ exports.changePassword = asyncHandler(async (req, res) => {
     res.status(400).json({ message: "All field are required" });
   }
 
-  const user = await User.findById(req.user._id)
+  const user = await User.findById(req.user._id);
 
-  const isMatch = await bcrypt.compare(currentPassword, user.password)
+  const isMatch = await bcrypt.compare(currentPassword, user.password);
 
-  if(!isMatch) {
-    return res.status(400).json({message: "Invalid password!"})
+  if (!isMatch) {
+    return res.status(400).json({ message: "Invalid password!" });
   }
 
-  if(isMatch) {
-    user.password = newPassword
-    await user.save()
-    return res.status(200).json({message: "Password changed successfully"})
+  if (isMatch) {
+    user.password = newPassword;
+    await user.save();
+    return res.status(200).json({ message: "Password changed successfully" });
   } else {
-    return res.status(400).json({message: "Password could not be changed"})
+    return res.status(400).json({ message: "Password could not be changed" });
   }
 });

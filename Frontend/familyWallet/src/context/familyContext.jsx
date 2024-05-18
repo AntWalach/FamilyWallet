@@ -29,6 +29,7 @@ export const FamilyProvider = ({ children }) => {
         name: member.name,
         email: member.email,
         password: member.password,
+        familyRole: member.familyRole,
       });
       toast.success(`Member ${member.name} registered successfully!`);
     } catch (error) {

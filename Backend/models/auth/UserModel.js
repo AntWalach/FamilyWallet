@@ -45,8 +45,12 @@ const UserSchema = new mongoose.Schema(
 
     family: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Family',
+      ref: "Family",
       default: null,
+    },
+    familyRole: {
+      type: String,
+      enum: ["child", "parent"],
     },
   },
   { timestamps: true, minimize: true }

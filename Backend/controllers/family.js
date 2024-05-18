@@ -8,7 +8,7 @@ exports.createFamily = async (req, res) => {
     const ownerId = req.user._id;
     const owner = await User.findById(ownerId);
     if (!owner) {
-      return res.status(404).json({ message: "Owner not found!"  });
+      return res.status(404).json({ message: "Owner not found!" });
     }
 
     const family = new Family({ name, owner: ownerId, members: [ownerId] });
@@ -17,14 +17,14 @@ exports.createFamily = async (req, res) => {
     owner.family = family._id;
     await owner.save();
 
-    res.status(201).json({ message: "Family created", data: family});
+    res.status(201).json({ message: "Family created", data: family });
   } catch (error) {
-    res.status(500).json({  message: "Server error" });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
 exports.registerFamilyMember = async (req, res) => {
-  const { familyId, name, email, password } = req.body;
+  const { familyId, name, email, password, familyRole } = req.body;
 
   const family = await Family.findById(familyId);
   if (!family) {
@@ -53,6 +53,7 @@ exports.registerFamilyMember = async (req, res) => {
     name,
     email,
     password,
+    familyRole,
   });
 
   const token = generateToken(user._id);
@@ -89,8 +90,11 @@ exports.registerFamilyMember = async (req, res) => {
 
 exports.getFamily = async (req, res) => {
   try {
-    const familyId = req.user.family
-    const family = await Family.findById(familyId).populate('members', 'name email role photo bio isVerified');
+    const familyId = req.user.family;
+    const family = await Family.findById(familyId).populate(
+      "members",
+      "name email role photo bio isVerified"
+    );
     if (!family) {
       return res.status(404).json({ message: "Family not found" });
     }

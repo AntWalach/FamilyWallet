@@ -3,7 +3,7 @@ export const transactions = <i className="fa-solid fa-credit-card"></i>
 export const categories = <i className="fa-solid fa-tags"></i>
 export const accounts = <i className="fa-solid fa-wallet"></i>
 export const settings = <i className="fa-solid fa-cog"></i>
-export const family = <i class="fa-solid fa-users"></i>
+export const family = <i className="fa-solid fa-users"></i>
 export const logout = <i className="fa-solid fa-sign-out"></i>
 export const trend = <i className="fa-solid fa-money-bill-trend-up"></i>
 export const expenses = <i className="fa-solid fa-money-bill-transfer"></i>
@@ -29,4 +29,4 @@ export const medical = <i className="fa-solid fa-briefcase-medical"></i>
 export const tv = <i className="fa-solid fa-tv"></i>
 export const circle = <i className="fa-solid fa-circle-dot"></i>
 export const eye = <i className="fas fa-eye"></i>
-export const admin = <i class="fa-solid fa-hammer"></i>
+export const admin = <i className="fa-solid fa-hammer"></i>

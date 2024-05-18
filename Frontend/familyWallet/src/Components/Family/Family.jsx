@@ -9,10 +9,9 @@ function Family() {
   const { name, family } = user;
   const { getFamily, familyData } = useFamilyContext();
 
-
   useEffect(() => {
-    if(family){
-      getFamily()
+    if (family) {
+      getFamily();
     }
   }, []);
 
@@ -22,7 +21,8 @@ function Family() {
       {!family ? (
         <FamilyRegistrationForm />
       ) : (
-        familyData && familyData.members && (
+        familyData &&
+        familyData.members && (
           <div>
             <h2>Family Members</h2>
             <ul>
