@@ -103,3 +103,32 @@ exports.getFamily = async (req, res) => {
     res.status(500).json({ message: "Server error!" });
   }
 };
+
+exports.deleteFamily = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const family = await Family.findById(id);
+    if (!family) {
+      return res.status(404).json({ message: "Family not found" });
+    }
+
+    const ownerId = req.user._id;
+    if (!family.owner.equals(ownerId)) {
+      return res
+        .status(403)
+        .json({ message: "You are not authorized to delete this family" });
+    }
+
+    await User.deleteMany({ _id: { $in: family.members, $ne: ownerId } });
+
+    await Family.findByIdAndDelete(id);
+
+    const owner = await User.findById(ownerId);
+    owner.family = null;
+    await owner.save();
+    res.status(200).json({ message: "Family deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};

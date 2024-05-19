@@ -51,9 +51,21 @@ export const FamilyProvider = ({ children }) => {
     }
   };
 
+
+  const deleteFamily = async (id) => {
+    try {
+      const res = await axios.delete(`${BASE_URL}delete-family/${id}`)
+      toast.success("Family deleted!")
+      getFamily()
+    } catch (error) {
+      console.log("Error deleting family", error);
+      toast.error(error.response.data.message);
+    }
+  }
+
   return (
     <FamilyContext.Provider
-      value={{ createFamily, registerFamilyMember, getFamily, familyData }}
+      value={{ createFamily, registerFamilyMember, getFamily, familyData, deleteFamily }}
     >
       {children}
     </FamilyContext.Provider>

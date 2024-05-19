@@ -5,15 +5,20 @@ import { useFamilyContext } from "../../context/familyContext";
 import { useUserContext } from "../../context/userContext";
 
 function Family() {
-  const { user } = useUserContext();
+  const { user, getUser } = useUserContext();
   const { name, family } = user;
-  const { getFamily, familyData } = useFamilyContext();
+  const { getFamily, familyData, deleteFamily } = useFamilyContext();
 
   useEffect(() => {
     if (family) {
       getFamily();
     }
-  }, []);
+  }, [family]);
+
+  const handleDeleteFamily = async () => {
+    await deleteFamily(family);
+    await getUser();
+  };
 
   return (
     <div className={layouts.innerLayout}>
@@ -24,6 +29,7 @@ function Family() {
         familyData &&
         familyData.members && (
           <div>
+            <button onClick={handleDeleteFamily}>Delete Family</button>
             <h2>Family Members</h2>
             <ul>
               {familyData.members.map((member) => (

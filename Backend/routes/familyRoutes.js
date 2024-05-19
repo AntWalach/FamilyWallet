@@ -5,10 +5,12 @@ const {
   createFamily,
   registerFamilyMember,
   getFamily,
+  deleteFamily,
 } = require("../controllers/family");
 
 router
   .post("/create-family", protect, createFamily)
   .post("/register-family-member", protect, registerFamilyMember)
-  .get("/family", protect, getFamily);
+  .get("/family", protect, getFamily)
+  .delete("/delete-family/:id", protect, deleteFamily);
 module.exports = router;
