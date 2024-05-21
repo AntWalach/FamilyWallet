@@ -29,32 +29,36 @@ ChartJs.register(
 function Chart() {
   const { incomes, expenses } = useGlobalContext();
 
-  const data = {
-    labels: incomes.map((inc) => {
-      const { date } = inc;
-      return dateFormat(date);
-    }),
+  // Łączenie i sortowanie danych według daty
+  const allData = [
+    ...incomes.map(item => ({ ...item, type: 'income' })),
+    ...expenses.map(item => ({ ...item, type: 'expense' }))
+  ].sort((a, b) => new Date(a.date) - new Date(b.date));
 
+  // Obliczanie skumulowanego salda
+  let cumulativeBalance = 0;
+  const balanceData = allData.map(item => {
+    if (item.type === 'income') {
+      cumulativeBalance += item.amount;
+    } else {
+      cumulativeBalance -= item.amount;
+    }
+    return {
+      date: item.date,
+      balance: cumulativeBalance
+    };
+  });
+
+  // Przygotowanie danych do wykresu
+  const data = {
+    labels: balanceData.map(item => dateFormat(item.date)),
     datasets: [
       {
-        label: "Income",
-        data: [
-          ...incomes.map((income) => {
-            const { amount } = income;
-            return amount;
-          }),
-        ],
-        backgroundColor: "green",
-      },
-      {
-        label: "Expenses",
-        data: [
-          ...expenses.map((expense) => {
-            const { amount } = expense;
-            return amount;
-          }),
-        ],
-        backgroundColor: "red",
+        label: "Balance",
+        data: balanceData.map(item => item.balance),
+        backgroundColor: "#ff7c4c",
+        borderColor: "#ff7c4c",
+        fill: false,
       },
     ],
   };
