@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import layouts from "../../styles/layouts.module.css";
-import FamilyRegistrationForm from "./FamilyRegistrationForm";
+import FamilyRegistrationForm from "../Form/FamilyRegistrationForm";
 import { useFamilyContext } from "../../context/familyContext";
 import { useUserContext } from "../../context/userContext";
 
@@ -21,27 +21,32 @@ function Family() {
   };
 
   return (
-    <div className={layouts.innerLayout}>
-      <h1>Family Page {name}</h1>
-      {!family ? (
-        <FamilyRegistrationForm />
-      ) : (
-        familyData &&
-        familyData.members && (
-          <div>
-            <button onClick={handleDeleteFamily}>Delete Family</button>
-            <h2>Family Members</h2>
-            <ul>
-              {familyData.members.map((member) => (
-                <li key={member._id}>
-                  <div>Name: {member.name}</div>
-                  <div>Email: {member.email}</div>
-                </li>
-              ))}
-            </ul>
+    <div className={`${layouts.familyRegistration}`}>
+      <div className={layouts.innerLayout}>
+        {!family ? (
+          <div className={`${layouts.familyRegistrationContent}`}>
+            <FamilyRegistrationForm />
           </div>
-        )
-      )}
+        ) : (
+          familyData &&
+          familyData.members && (
+            <div>
+              <h1>Family {familyData.name}</h1>
+              <ul>
+                {familyData.members.map((member) => (
+                  <li key={member._id}>
+                    <div>Name: {member.name}</div>
+                    <div>Email: {member.email}</div>
+                  </li>
+                ))}
+              </ul>
+              <button className={`${layouts.buttonRemoveFamily}`} onClick={handleDeleteFamily}>
+                Delete Family
+              </button>
+            </div>
+          )
+        )}
+      </div>
     </div>
   );
 }

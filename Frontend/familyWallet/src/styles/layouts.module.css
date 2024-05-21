@@ -134,6 +134,41 @@
     }
 }
 
+.familyRegistration{
+    display: flex;
+    overflow: auto;
+    .familyRegistrationContent{
+        display: flex;
+        gap: 2rem;
+    }
+
+    .buttonCreateFamily{
+        border: none;
+        background-color: var(--button-color-main);
+        padding: 10px 10px;
+        border-radius: 32px;
+        color: var(--button-color-text);
+        margin-bottom: 1rem;
+        width: 100%;
+        &:hover{
+            background-color: var(--button-color-hover);
+        }
+    }
+
+    .buttonRemoveFamily{
+        border: none;
+        background-color: var(--button-color-main);
+        padding: 10px 10px;
+        border-radius: 32px;
+        color: var(--button-color-text);
+        margin-bottom: 1rem;
+        &:hover{
+            background-color: var(--button-color-hover);
+        }
+    }
+}
+
+
 .transactions{
 
 }

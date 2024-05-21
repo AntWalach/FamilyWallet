@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import layouts from "../../styles/layouts.module.css";
 import { useFamilyContext } from "../../context/familyContext";
 import { useUserContext } from "../../context/userContext";
 
@@ -27,7 +28,7 @@ const FamilyRegistrationForm = () => {
   const addMember = () => {
     setMembers([
       ...members,
-      { name: "", email: "", password: "", familyRole: "parent" },
+      { name: "", email: "", password: "", familyRole: "" },
     ]);
     setShowMemberForm(true);
   };
@@ -57,73 +58,83 @@ const FamilyRegistrationForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create Family</h2>
-      <label>
-        Family Name:
-        <input
-          type="text"
+    <form className={`${layouts.form}`} onSubmit={handleSubmit}>
+      <h1>Create Family</h1>
+      <div className={`${layouts.inputControl}`} style={{ marginBottom: '1rem' }}>
+        <input 
+          type="text" 
           value={familyName}
+          name={'title'}
+          placeholder='Enter family name'
           onChange={(e) => setFamilyName(e.target.value)}
           required
         />
-      </label>
-      <br />
+      </div>
       {showMemberForm &&
         members.map((member, index) => (
-          <div key={index}>
-            <label>
-              Name:
+          <div key={index} style={{ marginBottom: '-1rem' }}>
+            <div className={`${layouts.inputControl}`} style={{ marginBottom: '1rem' }}>
               <input
                 type="text"
                 name="name"
                 value={member.name}
+                placeholder="Enter family member name"
                 onChange={(event) => handleMemberChange(index, event)}
                 required
               />
-            </label>
-            <label>
-              Email:
+            </div>
+            <div className={`${layouts.inputControl}`} style={{ marginBottom: '1rem' }}>
               <input
                 type="email"
                 name="email"
                 value={member.email}
+                placeholder="Enter family member email"
                 onChange={(event) => handleMemberChange(index, event)}
                 required
               />
-            </label>
-            <label>
-              Password:
+            </div>
+            <div className={`${layouts.inputControl}`} style={{ marginBottom: '1rem' }}>
               <input
                 type="password"
                 name="password"
                 value={member.password}
+                placeholder="Password"
                 onChange={(event) => handleMemberChange(index, event)}
                 required
               />
-            </label>
-            <label>
-              Family Role:
+            </div>
+            <div className={`${layouts.selects} ${layouts.inputControl}`} style={{ marginBottom: '1rem' }}>
               <select
                 name="familyRole"
                 value={member.familyRole}
                 onChange={(event) => handleRoleChange(index, event)}
                 required
               >
+                <option value="" disabled>Family role</option>
                 <option value="parent">Parent</option>
                 <option value="child">Child</option>
               </select>
-            </label>
-            <button type="button" onClick={() => removeFormMember(index)}>
-              Remove
-            </button>
+            </div>
+            <div className={`${layouts.submitBtn}`}>
+              <button type="button" className={`${layouts.buttonSubmit}`} onClick={() => removeFormMember(index)}>
+                Remove
+              </button>
+            </div>
           </div>
         ))}
 
-      <button type="button" onClick={addMember}>
-        Add Member
-      </button>
-      <button type="submit">Create Family</button>
+      <div className={`${layouts.submitBtn}`}>
+        <button type="button" className={`${layouts.buttonSubmit}`} onClick={addMember}>
+          Add Member
+          <i className="fa-solid fa-user-plus mx-2"></i>
+        </button>
+      </div>
+      <div className={`${layouts.submitBtn}`}>
+        <button type="submit" className={`${layouts.buttonCreateFamily}`}>
+          Create Family
+          <i className="fa-solid fa-house mx-2"></i>
+        </button>
+      </div>
     </form>
   );
 };
