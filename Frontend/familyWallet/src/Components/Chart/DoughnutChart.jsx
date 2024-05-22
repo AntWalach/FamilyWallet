@@ -114,7 +114,7 @@ function DoughnutChart({ members }) {
         <select id="month" value={selectedMonth} onChange={handleMonthChange}>
           {Array.from({ length: 12 }, (_, i) => (
             <option key={i} value={i}>
-              {new Date(0, i).toLocaleString("default", { month: "long" })}
+              {new Date(0, i).toLocaleString("en-US", { month: "long" })}
             </option>
           ))}
         </select>

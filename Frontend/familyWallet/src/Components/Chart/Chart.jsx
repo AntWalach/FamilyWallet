@@ -32,13 +32,11 @@ function Chart() {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
-  // Łączenie i sortowanie danych według daty
   const allData = [
     ...incomes.map((item) => ({ ...item, type: "income" })),
     ...expenses.map((item) => ({ ...item, type: "expense" })),
   ].sort((a, b) => new Date(a.date) - new Date(b.date));
 
-  // Filtruj dane według wybranego miesiąca i roku
   const filteredData = allData.filter((item) => {
     const itemDate = new Date(item.date);
     return (
@@ -47,7 +45,6 @@ function Chart() {
     );
   });
 
-  // Obliczanie skumulowanego salda
   const dailyBalances = {};
   filteredData.forEach((item) => {
     const dateStr = item.date;
@@ -72,7 +69,6 @@ function Chart() {
       };
     });
 
-  // Przygotowanie danych do wykresu
   const data = {
     labels: balanceData.map((item) => dateFormat(item.date)),
     datasets: [
@@ -103,7 +99,7 @@ function Chart() {
           <select id="month" value={selectedMonth} onChange={handleMonthChange}>
             {Array.from({ length: 12 }, (_, i) => (
               <option key={i} value={i}>
-                {new Date(0, i).toLocaleString("default", { month: "long" })}
+                {new Date(0, i).toLocaleString("en-US", { month: "long" })}
               </option>
             ))}
           </select>
