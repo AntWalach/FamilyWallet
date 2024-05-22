@@ -94,8 +94,7 @@ function Chart() {
     <div className={`${layouts.innerLayout}`}>
       <div className={`${dashboard.chartStyled}`}>
         <Line data={data} />
-        <div>
-          <label htmlFor="month">Month: </label>
+        <div className={`${layouts.chartFilters}`}>
           <select id="month" value={selectedMonth} onChange={handleMonthChange}>
             {Array.from({ length: 12 }, (_, i) => (
               <option key={i} value={i}>
@@ -103,7 +102,7 @@ function Chart() {
               </option>
             ))}
           </select>
-          <label htmlFor="year">Year: </label>
+
           <select id="year" value={selectedYear} onChange={handleYearChange}>
             {Array.from(
               new Set(allData.map((item) => new Date(item.date).getFullYear()))

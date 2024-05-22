@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { useGlobalContext } from "../../context/globalContext";
+import layouts from "../../styles/layouts.module.css";
+import dashboard from "../../styles/dashboard.module.css";
 import {
   Chart as ChartJs,
   CategoryScale,
@@ -108,9 +110,8 @@ function DoughnutChart({ members }) {
   };
 
   return (
-    <div>
-      <div>
-        <label htmlFor="month">Month: </label>
+    <div className={`${layouts.donutChart}`}>
+      <div className={`${layouts.selector}`}>
         <select id="month" value={selectedMonth} onChange={handleMonthChange}>
           {Array.from({ length: 12 }, (_, i) => (
             <option key={i} value={i}>
@@ -118,7 +119,6 @@ function DoughnutChart({ members }) {
             </option>
           ))}
         </select>
-        <label htmlFor="year">Year: </label>
         <select id="year" value={selectedYear} onChange={handleYearChange}>
           {Array.from(
             new Set(
@@ -130,7 +130,6 @@ function DoughnutChart({ members }) {
             </option>
           ))}
         </select>
-        <label htmlFor="member">Member: </label>
         <select
           id="member"
           value={selectedMember}

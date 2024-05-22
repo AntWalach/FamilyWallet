@@ -46,8 +46,7 @@ function Expenses() {
             <FormExpenses />
           </div>
           <div className={`${layouts.incomesDisplay}`}>
-            <div>
-              <label htmlFor="month">Month: </label>
+            <div className={`${layouts.selector}`}>
               <select
                 id="month"
                 value={selectedMonth}
@@ -61,7 +60,6 @@ function Expenses() {
                   </option>
                 ))}
               </select>
-              <label htmlFor="year">Year: </label>
               <select
                 id="year"
                 value={selectedYear}

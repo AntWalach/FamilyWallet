@@ -5,12 +5,14 @@ import FamilyRegistrationForm from "../Form/FamilyRegistrationForm";
 import { useFamilyContext } from "../../context/familyContext";
 import { useUserContext } from "../../context/userContext";
 import DoughnutChart from "../Chart/DoughnutChart";
-
+import { dollar, plus } from "../../utils/icons";
+import { useGlobalContext } from "../../context/globalContext";
 function Family() {
   const { user, getUser } = useUserContext();
   const { family } = user;
   const { getFamily, familyData, deleteFamily } = useFamilyContext();
-
+  const { totalExpense, totalIncome, totalBalance, getIncomes, getExpenses } =
+    useGlobalContext();
   useEffect(() => {
     if (family) {
       getFamily();
@@ -22,10 +24,10 @@ function Family() {
     await getUser();
   };
 
-  console.log(familyData.members)
+  console.log(familyData.members);
 
   return (
-    <div className={`${layouts.familyRegistration}`}>
+    <div className={`${layouts.dashboard}`}>
       <div className={layouts.innerLayout}>
         {!family ? (
           <div className={`${layouts.familyRegistrationContent}`}>
@@ -34,17 +36,20 @@ function Family() {
         ) : (
           familyData &&
           familyData.members && (
-            <div className={`${dashboard.statsCon}`}>
-              <div>
-                <h1>Family {familyData.name}</h1>
-                <button
-                  className={`${layouts.buttonRemoveFamily}`}
-                  onClick={handleDeleteFamily}
-                >
-                  Delete Family
-                </button>
-                <DoughnutChart members={familyData.members} /> {/* Przekazywanie listy członków rodziny jako props */}
-                <div>
+            <div>
+              <button
+                className={`${layouts.buttonRemoveFamily}`}
+                onClick={handleDeleteFamily}
+              >
+                Delete Family
+              </button>
+              <div className={`${dashboard.statsCon}`}>
+                <div className={`${dashboard.chartCon}`}>
+                  <h1>Family {familyData.name}</h1>
+                  <DoughnutChart members={familyData.members} />{" "}
+                  <div className={`${dashboard.amountCon}`}></div>
+                </div>
+                <div className={`${dashboard.family}`}>
                   {familyData.members.map((member) => (
                     <div key={member._id}>
                       <p>Name: {member.name}</p>
