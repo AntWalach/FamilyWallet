@@ -6,7 +6,7 @@ const {
   registerFamilyMember,
   getFamily,
   deleteFamily,
-} = require("../controllers/family");
+} = require("../controllers/familyController");
 
 router
   .post("/create-family", protect, createFamily)

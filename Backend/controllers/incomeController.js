@@ -27,13 +27,11 @@ exports.addIncome = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Server error!" });
   }
-
-  console.log(income);
 };
 
 exports.getIncomes = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user._id;
     const incomes = await IncomeSchema.find({ user: userId }).sort({
       createdAt: -1,
     });
@@ -44,12 +42,14 @@ exports.getIncomes = async (req, res) => {
 };
 
 exports.deleteIncome = async (req, res) => {
-  const { id } = req.params;
-  IncomeSchema.findByIdAndDelete(id)
-    .then((income) => {
-      res.status(200).json({ message: "Income deleted!" });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: "Server error!" });
-    });
+  try {
+    const { id } = req.params;
+    const deletedIncome = await IncomeSchema.findByIdAndDelete(id);
+    if (!deletedIncome) {
+      return res.status(404).json({ message: "Income not found!" });
+    }
+    res.status(200).json({ message: "Income deleted!" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error!" });
+  }
 };

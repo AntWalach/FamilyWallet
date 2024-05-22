@@ -1,5 +1,5 @@
-const Family = require("../models/FamilyModel");
-const User = require("../models/auth/UserModel");
+const Family = require("../models/FamilyModel.js");
+const User = require("../models/auth/UserModel.js");
 const generateToken = require("../helpers/generateToken.js");
 
 exports.createFamily = async (req, res) => {

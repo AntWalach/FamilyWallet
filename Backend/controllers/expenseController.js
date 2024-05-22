@@ -44,14 +44,16 @@ exports.getExpenses = async (req, res) => {
 };
 
 exports.deleteExpense = async (req, res) => {
-  const { id } = req.params;
-  ExpenseSchema.findByIdAndDelete(id)
-    .then((expense) => {
-      res.status(200).json({ message: "Expense deleted!" });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: "Server error!" });
-    });
+  try {
+    const { id } = req.params;
+    const deletedExpense = await ExpenseSchema.findByIdAndDelete(id);
+    if (!deletedExpense) {
+      return res.status(404).json({ message: "Expense not found!" });
+    }
+    res.status(200).json({ message: "Expense deleted!" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error!" });
+  }
 };
 
 exports.getExpensesId = async (req, res) => {

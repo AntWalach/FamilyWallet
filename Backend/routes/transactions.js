@@ -4,12 +4,12 @@ const {
   getExpenses,
   deleteExpense,
   getExpensesId,
-} = require("../controllers/expense");
+} = require("../controllers/expenseController");
 const {
   addIncome,
   getIncomes,
   deleteIncome,
-} = require("../controllers/income");
+} = require("../controllers/incomeController");
 
 const { protect } = require("../middleware/authMiddleware.js");
 const router = express.Router();
