@@ -29,7 +29,7 @@ function App() {
   const displayData = () => {
     switch (active) {
       case 1:
-        return <Dashboard />;
+        return <Dashboard active={active} setActive={setActive} />;
       case 2:
         return <Family />;
       case 3:
@@ -43,7 +43,7 @@ function App() {
       case 7:
         return <Admin />;
       default:
-        return <Dashboard />;
+        return <Dashboard active={active} setActive={setActive} />;
     }
   };
 

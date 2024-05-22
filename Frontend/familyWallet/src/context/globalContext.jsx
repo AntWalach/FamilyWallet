@@ -75,6 +75,29 @@ export const GlobalProvider = ({ children }) => {
     }
   };
 
+  const getExpensesId = async (userId) => {
+    try {
+      const response = await axios.get(`${BASE_URL}get-expenses/${userId}`);
+      return response.data;
+    } catch (error) {
+      console.log("Error getting expenses", error);
+      toast.error(error.response.data.message);
+    }
+  };
+
+  const getExpensesForAllMembers = async (members) => {
+    const allExpenses = await Promise.all(
+      members.map(async (member) => {
+        const memberExpenses = await getExpensesId(member._id);
+        return memberExpenses;
+      })
+    );
+
+    return allExpenses.flat().reduce((totalExpenses, memberExpenses) => {
+      return totalExpenses.concat(memberExpenses);
+    }, []);
+  };
+
   const deleteExpense = async (id) => {
     try {
       const response = await axios.delete(`${BASE_URL}delete-expense/${id}`);
@@ -137,6 +160,8 @@ export const GlobalProvider = ({ children }) => {
         totalMoney,
         totalBalance,
         transactionHistory,
+        getExpensesId,
+        getExpensesForAllMembers,
       }}
     >
       {children}
