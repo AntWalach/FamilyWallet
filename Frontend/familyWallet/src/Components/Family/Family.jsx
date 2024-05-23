@@ -36,28 +36,33 @@ function Family() {
         ) : (
           familyData &&
           familyData.members && (
-            <div>
-              <button
-                className={`${layouts.buttonRemoveFamily}`}
-                onClick={handleDeleteFamily}
-              >
-                Delete Family
-              </button>
-              <div className={`${dashboard.statsCon}`}>
-                <div className={`${dashboard.chartCon}`}>
-                  <h1>Family {familyData.name}</h1>
-                  <DoughnutChart members={familyData.members} />{" "}
-                  <div className={`${dashboard.amountCon}`}></div>
-                </div>
-                <div className={`${dashboard.family}`}>
+            <div className={`${dashboard.statsCon}`}>
+              <div className={`${dashboard.chartCon}`}>
+                <h1>Family {familyData.name}</h1>
+                <button
+                  className={`${layouts.buttonRemoveFamily}`}
+                  onClick={handleDeleteFamily}
+                >
+                  Delete Family
+                </button>
+                <DoughnutChart members={familyData.members} />{" "}
+                <div className={`${dashboard.amountCon}`}></div>
+              </div>
+
+              <div className={`${dashboard.historyCon}`}>
+                <div className={`${dashboard.historyDiv}`}>
                   {familyData.members.map((member) => (
-                    <div key={member._id}>
+                    <div
+                      key={member._id}
+                      className={`${dashboard.historyItem}`}
+                    >
                       <p>Name: {member.name}</p>
                       <p>Email: {member.email}</p>
                     </div>
                   ))}
                 </div>
               </div>
+              <div></div>
             </div>
           )
         )}

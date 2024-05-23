@@ -674,6 +674,19 @@
 }
 
 
+.familyCon {
+    display: flex;
+    flex-direction: column;
+    grid-column: 4 / -1;
+    background: #FCF6F9;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+    padding: 1rem;
+    border-radius: 20px;
+    height: 450px;
+
+}
+
 @keyframes scale-in-hor-left {
     0% {
       transform: scaleX(0);

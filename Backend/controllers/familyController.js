@@ -58,13 +58,6 @@ exports.registerFamilyMember = async (req, res) => {
 
   const token = generateToken(user._id);
 
-  // res.cookie("token", token, {
-  //   path: "/",
-  //   httpOnly: true,
-  //   maxAge: 30 * 24 * 60 * 60 * 60 * 1000, //30 days
-  //   sameSite: true,
-  //   secure: true,
-  // });
   await user.save();
   family.members.push(user._id);
   await family.save();

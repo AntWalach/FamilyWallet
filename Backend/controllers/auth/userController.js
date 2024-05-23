@@ -8,75 +8,73 @@ const crypto = require("node:crypto");
 const hashToken = require("../../helpers/hashToken.js");
 const sendEmail = require("../../helpers/sendEmail.js");
 const { json } = require("express");
+const emailValidator = require("email-validator");
 
 exports.registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  try {
+    const { name, email, password } = req.body;
 
-  //validation
-  if (!name || !email || !password) {
-    res.status(400).json({ message: "All fields are required" });
-  }
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
 
-  //check password
-  if (password.length < 6) {
-    return res
-      .status(400)
-      .json({ message: "Password must be at least 6 characters" });
-  }
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 6 characters" });
+    }
 
-  const userExists = await User.findOne({ email });
-  //console.log(userExists);
-  if (userExists) {
-    // bad request
-    return res.status(400).json({ message: "User already exists" });
-  }
+    if (!emailValidator.validate(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
 
-  const user = await User.create({
-    name,
-    email,
-    password,
-    familyRole: "parent",
-  });
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).json({ message: "User already exists" });
+    }
 
-  //generating token with id
-  const token = generateToken(user._id);
-  //console.log("Token " + token);
-  //send back the user and token in the response to the client
-  // res.cookie("token", token, {
-  //   path: "/",
-  //   httpOnly: true,
-  //   maxAge: 30 * 24 * 60 * 60 * 60 * 1000, //30 days
-  //   sameSite: true,
-  //   secure: true,
-  // });
-
-  if (user) {
-    const { _id, name, email, role, photo, bio, isVerified } = user;
-
-    // 201 Created
-    res.status(201).json({
-      _id,
+    const user = await User.create({
       name,
       email,
-      role,
-      photo,
-      bio,
-      isVerified,
-      token,
+      password,
+      familyRole: "parent",
     });
-  } else {
-    res.status(400).json({ message: "Invalid user data" });
+
+    //generating token with id
+    const token = generateToken(user._id);
+
+    if (user) {
+      const { _id, name, email, role, photo, bio, isVerified } = user;
+
+      // 201 Created
+      return res.status(201).json({
+        _id,
+        name,
+        email,
+        role,
+        photo,
+        bio,
+        isVerified,
+        token,
+      });
+    } else {
+      return res.status(400).json({ message: "Invalid user data" });
+    }
+  } catch (error) {
+    console.error("Error in registerUser:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 });
 
 exports.loginUser = asyncHandler(async (req, res) => {
-  //get email and password from req.bofy
   const { email, password } = req.body;
-
-  //validations
 
   if (!email || !password) {
     return res.status(400).json({ message: "All fields are required" });
+  }
+
+  if (!emailValidator.validate(email)) {
+    return res.status(400).json({ message: "Invalid email format" });
   }
 
   const userExists = await User.findOne({ email });
@@ -85,14 +83,12 @@ exports.loginUser = asyncHandler(async (req, res) => {
     return res.status(404).json({ message: "User not found, sign up!" });
   }
 
-  //chceck if the password match the hashed password
   const isMatch = await bcrypt.compare(password, userExists.password);
 
   if (!isMatch) {
     return res.status(400).json({ message: "Invalid credentials" });
   }
 
-  //generate token with id
   const token = generateToken(userExists._id);
 
   if (userExists && isMatch) {
@@ -104,7 +100,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
       sameSite: true,
       secure: true,
     });
-    // send back thes user and token in the res to the client
+
     res.status(200).json({
       _id,
       name,
@@ -119,8 +115,6 @@ exports.loginUser = asyncHandler(async (req, res) => {
     res.status(400).json({ message: "Invalid email or password" });
   }
 });
-
-//logout user
 
 exports.logoutUser = asyncHandler(async (req, res) => {
   res.clearCookie("token");
