@@ -76,7 +76,7 @@ To run the Family Wallet application, follow these steps:
    ```
 4. Open another terminal window and navigate to the frontend directory
    ```bash
-   cd frontend
+   cd frontend/familywallet
    ```
 5. Install frontend dependencies
    ```bash
