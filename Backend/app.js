@@ -32,3 +32,5 @@ const server = () => {
 }
 
 server();
+
+module.exports = app;

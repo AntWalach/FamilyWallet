@@ -29,12 +29,12 @@ export const menuItems =[
         icon: expenses,
         link: '/familywallet'
     },
-    {
-        id: 5,
-        title: 'View Transactions',
-        icon: transactions,
-        link: '/familywallet'
-    },
+    // {
+    //     id: 5,
+    //     title: 'View Transactions',
+    //     icon: transactions,
+    //     link: '/familywallet'
+    // },
     {
         id: 6,
         title: 'Settings',
