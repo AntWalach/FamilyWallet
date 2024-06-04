@@ -86,6 +86,7 @@ function Dashboard({ active, setActive }) {
             familyData &&
             familyData.members && (
               <div className={`${dashboard.family}`}>
+                <h1>Family {familyData.name}</h1>
                 <div>
                   {familyData.members.map((member) => (
                     <div key={member._id}>
